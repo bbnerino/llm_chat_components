@@ -1,4 +1,5 @@
 import { memo, useState } from 'react'
+import { countRender } from '../lib/renderCounter'
 import type { ToolPart } from '../runtime/types'
 import { fallbackTool, isRunning, useToolArgs, type ToolUI } from '../tools/registry'
 import { toolRegistry } from '../tools/views'
@@ -20,6 +21,7 @@ interface SlotProps {
 
 /** pinned / footer tool: 레지스트리의 View를 그대로 그린다 */
 export const ToolSlot = memo(function ToolSlot({ part, threadId, messageId }: SlotProps) {
+  countRender('ToolSlot')
   const ui = resolveTool(part.name)
   const args = useToolArgs(part, ui)
   const output = ui.isOutput ? (ui.isOutput(part.output) ? part.output : undefined) : part.output
@@ -28,6 +30,7 @@ export const ToolSlot = memo(function ToolSlot({ part, threadId, messageId }: Sl
 })
 
 const StepRow = memo(function StepRow({ part, threadId, messageId }: SlotProps) {
+  countRender('StepRow')
   const ui = resolveTool(part.name)
   const args = useToolArgs(part, ui)
   const [expanded, setExpanded] = useState(false)
@@ -56,6 +59,7 @@ const StepRow = memo(function StepRow({ part, threadId, messageId }: SlotProps) 
  * 사용자가 한 번이라도 직접 열고 닫으면 그 선택을 존중한다(null = 자동).
  */
 export const ToolSteps = memo(function ToolSteps({ parts, threadId, messageId }: { parts: ToolPart[]; threadId: string; messageId: string }) {
+  countRender('ToolSteps')
   const [userOpen, setUserOpen] = useState<boolean | null>(null)
   const running = parts.filter(isRunning).length
   const failed = parts.filter((p) => p.state === 'output-error').length

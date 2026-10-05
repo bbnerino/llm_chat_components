@@ -30,6 +30,7 @@ const SYSTEM_PROMPT = `You are a helpful assistant. Answer in the same language 
 - Use create_document only when the user asks for a deliverable (plan, report, essay, document). After creating it, reply with 1-2 sentences only.
 - Use get_current_time when the answer depends on today's date.
 - At the end of every answer, call suggest_followups with 2-3 short follow-up questions in the user's language. Never write follow-up questions in the answer text itself; the UI renders them from the tool.
+- Tools are invoked only through function calling. Never write tool syntax such as "functions.suggest_followups(...)" or "suggest_followups" in the answer text.
 Keep answers concise and use Markdown.`
 
 type Listener = (e: ServerEvent) => void

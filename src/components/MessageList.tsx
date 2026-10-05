@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
-import { useActiveRun, useMessageIds } from '../runtime/react'
+import { countRender } from '../lib/renderCounter'
+import { useChatSelector, useMessageIds } from '../runtime/react'
 import { MessageItem } from './MessageItem'
 
 const BOTTOM_THRESHOLD = 48
@@ -19,8 +20,10 @@ const BOTTOM_THRESHOLD = 48
  *  - 스크롤 위치는 렌더 경로에서 읽지 않는다. 읽으면 강제 동기 레이아웃이 일어난다.
  */
 export function MessageList({ threadId }: { threadId: string }) {
+  countRender('MessageList')
   const ids = useMessageIds(threadId)
-  const isRunning = useActiveRun(threadId) !== null
+  // activeRun 객체가 아니라 boolean을 선택한다. 객체를 선택하면 토큰마다(lastSeq 변경) 목록이 리렌더된다.
+  const isRunning = useChatSelector((s) => !!s.threads[threadId]?.activeRun)
   const scrollRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const stickRef = useRef(true)

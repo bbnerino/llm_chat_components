@@ -1,0 +1,12 @@
+{
+  "measuredAt": "2026-10-05T07:53:52Z",
+  "environment": "Chrome 152 (Claude desktop built-in browser), macOS, hidden tab (no painting) — timing excludes paint; render counts are deterministic",
+  "method": "bench/main.tsx — same N-turn conversation in both structures, then 40 events into the last turn; React Profiler actualDuration + wall time around flushSync; warm-up pass + 3 rounds, median",
+  "eventsPerRun": 40,
+  "legacy_10":  { "totalRenders": 53.5,  "renders": { "Page": 1, "MessageGroup": 11,  "ToolGroup": 20,  "MessageItem": 21.5 }, "commitMedianMs": 0.4, "wallMedianMs": 0.5, "wallP95Ms": 0.7, "forcedLayoutReads": 1 },
+  "modern_10":  { "totalRenders": 1,     "renders": { "MessageItem": 1 }, "commitMedianMs": 0.1, "wallMedianMs": 0.1, "wallP95Ms": 0.2, "forcedLayoutReads": 0 },
+  "legacy_30":  { "totalRenders": 113.5, "renders": { "Page": 1, "MessageGroup": 31,  "ToolGroup": 60,  "MessageItem": 21.5 }, "commitMedianMs": 0.8, "wallMedianMs": 1.0, "wallP95Ms": 1.2, "forcedLayoutReads": 1 },
+  "modern_30":  { "totalRenders": 1,     "renders": { "MessageItem": 1 }, "commitMedianMs": 0.1, "wallMedianMs": 0.1, "wallP95Ms": 0.2, "forcedLayoutReads": 0 },
+  "legacy_100": { "totalRenders": 323.5, "renders": { "Page": 1, "MessageGroup": 101, "ToolGroup": 200, "MessageItem": 21.5 }, "commitMedianMs": 2.1, "wallMedianMs": 2.9, "wallP95Ms": 5.5, "forcedLayoutReads": 1 },
+  "modern_100": { "totalRenders": 1,     "renders": { "MessageItem": 1 }, "commitMedianMs": 0.1, "wallMedianMs": 0.2, "wallP95Ms": 0.4, "forcedLayoutReads": 0 }
+}

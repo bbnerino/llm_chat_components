@@ -1,4 +1,5 @@
 import { memo, useEffect, useMemo, useState } from 'react'
+import { countRender } from '../lib/renderCounter'
 import { textOf } from '../runtime/reducer'
 import { useActiveRun, useMessage, useRuntime } from '../runtime/react'
 import type { Message } from '../runtime/types'
@@ -18,6 +19,7 @@ interface Props {
  * 나머지 수백 개의 행은 selector 결과가 같아 아예 렌더되지 않는다.
  */
 export const MessageItem = memo(function MessageItem({ threadId, messageId, isLast }: Props) {
+  countRender('MessageItem')
   const m = useMessage(threadId, messageId)
   if (!m) return null
   return m.role === 'user' ? <UserMessage m={m} threadId={threadId} /> : <AssistantMessage m={m} threadId={threadId} isLast={isLast} />
